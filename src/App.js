@@ -1,9 +1,11 @@
+import BasePage from '../src/components/BasePage';
+
 const App = () => {
   return (
-    <div>
+    <BasePage>
       <h1>Hello World</h1>
-    </div>
+    </BasePage>
   );
-}
+};
 
 export default App;
