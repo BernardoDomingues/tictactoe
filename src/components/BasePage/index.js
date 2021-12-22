@@ -3,28 +3,32 @@ import styled from "styled-components";
 
 import colors from "../../helpers/colors";
 
-import Logo from '../Logo';
+import Logo from "../Logo";
+import NavLink from "./NavLink";
 
 const index = ({ children }) => (
-    <>
-      <TopMenu>
-        <Logo logoStyle="height: 80px; margin-left: 200px;" />
-      </TopMenu>
-        <BodyMargin>
-          <Body>
-            {children}
-          </Body>
-        </BodyMargin>
-      <Footer />
-    </>
-  );
+  <>
+    <TopMenu>
+      <Logo logoStyle="height: 80px; margin-right: 50px;" />
+      <NavLink route="/" label="Home" />
+      <NavLink route="/about" label="About" />
+    </TopMenu>
+    <BodyMargin>
+      <Body>{children}</Body>
+    </BodyMargin>
+    <Footer />
+  </>
+);
 
 const TopMenu = styled.div`
+  display: flex;
   top: 0;
   width: 99.4%;
   height: 80px;
   background-color: ${colors.white};
   border: 3px solid ${colors.gray};
+  align-items: center;
+  justify-content: center;
 `;
 
 const Body = styled.div`
