@@ -1,6 +1,30 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+const calculateWinner = (gameState) => {
+  const winningPossibilities = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  for (let i = 0; i < winningPossibilities.length; i++) {
+    const [a, b, c] = winningPossibilities[i];
+    if (
+      gameState[a] &&
+      gameState[a] === gameState[b] &&
+      gameState[a] === gameState[c]
+    ) {
+      return gameState[a];
+    }
+  }
+  return null;
+};
+
 const Index = () => {
   const [gameState, setGameState] = useState([]);
   const [xIsNext, setXisNext] = useState(true);
@@ -12,13 +36,32 @@ const Index = () => {
     setXisNext(!xIsNext);
   };
 
-  const Cel = ({ Key }) => <BoardCel onClick={() => handleClick(Key)}>{gameState[Key]}</BoardCel>;
+  const disableButton = (Key) => {
+    const isKeyUsed = gameState[Key];
+    const haveWinner = calculateWinner(gameState);
+    if (isKeyUsed || haveWinner) {
+      return true;
+    }
+    return false;
+  };
 
-  const nextPlayer = "Next player: " + (xIsNext ? "X" : "O");
+  const Cel = ({ Key }) => (
+    <BoardCel disabled={disableButton(Key)} onClick={() => handleClick(Key)}>
+      {gameState[Key]}
+    </BoardCel>
+  );
+
+  const GameStatus = () => {
+    const haveWinner = calculateWinner(gameState);
+    if (haveWinner) {
+      return <span>Winner: {haveWinner}</span>;
+    }
+    return <span>Next Player: {xIsNext ? "X" : "O"}</span>;
+  };
 
   return (
     <Container>
-      <span>{nextPlayer}</span>
+      <GameStatus />
       <div>
         <Cel Key={0} />
         <Cel Key={1} />
