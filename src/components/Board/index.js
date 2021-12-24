@@ -58,11 +58,19 @@ const Index = () => {
     return false;
   };
 
-  const Cel = ({ Key }) => (
-    <BoardCel disabled={disableButton(Key)} onClick={() => handleClick(Key)}>
-      {gameState[Key] ? gameState[Key] : Key}
-    </BoardCel>
-  );
+  const Cel = ({ Key }) => {
+    const haveWinner = calculateWinner(gameState);
+    return (
+      <BoardCel
+        disabled={disableButton(Key)}
+        celKey={Key}
+        winnerPossibilitie={haveWinner.possibilitie}
+        onClick={() => handleClick(Key)}
+      >
+        {gameState[Key] ? gameState[Key] : Key}
+      </BoardCel>
+    );
+  };
 
   const GameStatus = () => {
     const haveWinner = calculateWinner(gameState);
@@ -107,6 +115,15 @@ const BoardCel = styled.button`
   height: 120px;
   width: 120px;
   font-size: 100px;
+  ${(props) => {
+    if (
+      props.celKey === props.winnerPossibilitie[0] ||
+      props.celKey === props.winnerPossibilitie[1] ||
+      props.celKey === props.winnerPossibilitie[2]
+    ) {
+      return { backgroundColor: "red" };
+    }
+  }}
 `;
 
 export default Index;
