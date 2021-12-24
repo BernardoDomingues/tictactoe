@@ -19,14 +19,17 @@ const calculateWinner = (gameState) => {
       gameState[a] === gameState[b] &&
       gameState[a] === gameState[c]
     ) {
-      return gameState[a];
+      return {
+        winningPlayer: gameState[a],
+        possibilitie: winningPossibilities[i],
+      };
     }
   }
-  return null;
+  return { winningPlayer: null, possibilitie: [null, null, null] };
 };
 
 const Index = () => {
-  const [gameState, setGameState] = useState([]);
+  const [gameState, setGameState] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
 
   const handleClick = (Key) => {
@@ -38,16 +41,18 @@ const Index = () => {
 
   const calculateDraw = () => {
     const haveWinner = calculateWinner(gameState);
-    if ((gameState.length === 9) && (!haveWinner)) {
-      return true;
-    } return false;
-  }
+    for (let i = 0; i < gameState.length; i++) {
+      if (!gameState[i] || haveWinner.winningPlayer) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   const disableButton = (Key) => {
     const isKeyUsed = gameState[Key];
     const haveWinner = calculateWinner(gameState);
-    const checkDraw = calculateDraw();
-    if (isKeyUsed || haveWinner || checkDraw) {
+    if (isKeyUsed || haveWinner.winningPlayer) {
       return true;
     }
     return false;
@@ -55,15 +60,15 @@ const Index = () => {
 
   const Cel = ({ Key }) => (
     <BoardCel disabled={disableButton(Key)} onClick={() => handleClick(Key)}>
-      {gameState[Key]}
+      {gameState[Key] ? gameState[Key] : Key}
     </BoardCel>
   );
 
   const GameStatus = () => {
     const haveWinner = calculateWinner(gameState);
     const checkDraw = calculateDraw();
-    if (haveWinner) {
-      return <span>Winner: {haveWinner}</span>;
+    if (haveWinner.winningPlayer) {
+      return <span>Winner: {haveWinner.winningPlayer}</span>;
     }
     if (checkDraw) {
       return <span>Draw</span>;
