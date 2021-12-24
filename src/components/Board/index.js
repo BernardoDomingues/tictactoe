@@ -36,10 +36,18 @@ const Index = () => {
     setXisNext(!xIsNext);
   };
 
+  const calculateDraw = () => {
+    const haveWinner = calculateWinner(gameState);
+    if ((gameState.length === 9) && (!haveWinner)) {
+      return true;
+    } return false;
+  }
+
   const disableButton = (Key) => {
     const isKeyUsed = gameState[Key];
     const haveWinner = calculateWinner(gameState);
-    if (isKeyUsed || haveWinner) {
+    const checkDraw = calculateDraw();
+    if (isKeyUsed || haveWinner || checkDraw) {
       return true;
     }
     return false;
@@ -53,8 +61,12 @@ const Index = () => {
 
   const GameStatus = () => {
     const haveWinner = calculateWinner(gameState);
+    const checkDraw = calculateDraw();
     if (haveWinner) {
       return <span>Winner: {haveWinner}</span>;
+    }
+    if (checkDraw) {
+      return <span>Draw</span>;
     }
     return <span>Next Player: {xIsNext ? "X" : "O"}</span>;
   };
