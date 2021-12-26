@@ -1,13 +1,44 @@
 import React from "react";
+import styled from "styled-components";
+
+import { useGames } from "../../providers/game";
+
+import Logo from "../../components/Logo";
+import ButtonGrid from "../../components/ButtonGrid";
+import Button from "../../components/Button";
+import SecondStyleButton from "../../components/SecondStyleButton";
 
 import BasePage from "../../components/BasePage";
 import NewGame from "../Game/New";
 
-const Home = () => (
-  <BasePage>
-    <h1>Home</h1>
-    <NewGame />
-  </BasePage>
-);
+const Home = () => {
+  const { gameState, setGameState} = useGames();
+
+  return (
+    <BasePage>
+      {gameState === 0 && (
+        <>
+          <LogoGrid>
+            <Logo logoStyle="width: 300px;" />
+          </LogoGrid>
+          <ButtonGrid>
+            <NewGameButton onClick={() => setGameState(1)}>New Game</NewGameButton>
+            <SecondStyleButton>Load Game</SecondStyleButton>
+          </ButtonGrid>
+        </>
+      )}
+      {gameState === 1 && (<NewGame />)}
+    </BasePage>
+  );
+};
+
+const LogoGrid = styled.div`
+  text-align: center;
+  margin-bottom: 100px;
+`;
+
+const NewGameButton = styled(Button)`
+  width: 200px;
+`;
 
 export default Home;
