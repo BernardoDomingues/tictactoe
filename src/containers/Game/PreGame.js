@@ -3,10 +3,14 @@ import styled from "styled-components";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
+import { useGames } from "../../providers/game";
+
 import InputField from "../../components/FormField";
 import Button from "../../components/Button";
+import SecondStyleButton from "../../components/SecondStyleButton";
 
-const PreGame = ({ handleUsersData }) => {
+const PreGame = () => {
+  const { setUsersData, backToMenu } = useGames();
   const values = { X: "", O: "" };
 
   const validations = Yup.object().shape({
@@ -22,7 +26,7 @@ const PreGame = ({ handleUsersData }) => {
   });
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    handleUsersData(values);
+    setUsersData(values);
     setSubmitting(false);
     resetForm();
   };
@@ -42,6 +46,9 @@ const PreGame = ({ handleUsersData }) => {
               <Button type="submit" disabled={isSubmitting}>
                 Start
               </Button>
+              <SecondStyleButton onClick={() => backToMenu()}>
+                Back
+              </SecondStyleButton>
             </Container>
           </FormData>
         );

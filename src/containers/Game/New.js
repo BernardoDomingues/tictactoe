@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { useGames } from "../../providers/game";
@@ -10,17 +10,16 @@ import ButtonGrid from "../../components/ButtonGrid";
 import SecondStyleButton from "../../components/SecondStyleButton";
 
 const New = () => {
-  const { setMenuState } = useGames();
-  const [usersData, setusersData] = useState(null);
+  const { usersData, backToMenu } = useGames();
 
   return (
     <>
-      {!usersData && <PreGame handleUsersData={setusersData} />}
+      {!usersData && <PreGame />}
       {usersData && (
         <>
-          <Board usersData={usersData} />
+          <Board />
           <ButtonGrid>
-            <BackToMenuButton onClick={() => setMenuState(0)}>
+            <BackToMenuButton onClick={() => backToMenu()}>
               Back to Menu
             </BackToMenuButton>
           </ButtonGrid>
