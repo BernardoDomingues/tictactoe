@@ -1,23 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { useGames } from "../../providers/game";
+
+import PreGame from "./PreGame";
 
 import Board from "../../components/Board";
 import ButtonGrid from "../../components/ButtonGrid";
 import SecondStyleButton from "../../components/SecondStyleButton";
 
 const New = () => {
-  const { setGameState } = useGames();
+  const { setMenuState } = useGames();
+  const [usersData, setusersData] = useState(null);
 
   return (
     <>
-      <Board />
-      <ButtonGrid>
-        <BackToMenuButton onClick={() => setGameState(0)}>
-          Back to Menu
-        </BackToMenuButton>
-      </ButtonGrid>
+      {!usersData && <PreGame handleUsersData={setusersData} />}
+      {usersData && (
+        <>
+          <Board usersData={usersData} />
+          <ButtonGrid>
+            <BackToMenuButton onClick={() => setMenuState(0)}>
+              Back to Menu
+            </BackToMenuButton>
+          </ButtonGrid>
+        </>
+      )}
     </>
   );
 };

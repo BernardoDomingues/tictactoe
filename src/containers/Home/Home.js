@@ -12,22 +12,22 @@ import BasePage from "../../components/BasePage";
 import NewGame from "../Game/New";
 
 const Home = () => {
-  const { gameState, setGameState} = useGames();
+  const { menuState, setMenuState } = useGames();
 
   return (
     <BasePage>
-      {gameState === 0 && (
+      {menuState === 0 && (
         <>
           <LogoGrid>
             <Logo logoStyle="width: 300px;" />
           </LogoGrid>
           <ButtonGrid>
-            <NewGameButton onClick={() => setGameState(1)}>New Game</NewGameButton>
+            <NewGameButton onClick={() => setMenuState(1)}>New Game</NewGameButton>
             <SecondStyleButton>Load Game</SecondStyleButton>
           </ButtonGrid>
         </>
       )}
-      {gameState === 1 && (<NewGame />)}
+      {menuState === 1 && (<NewGame />)}
     </BasePage>
   );
 };

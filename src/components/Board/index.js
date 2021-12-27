@@ -1,36 +1,40 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const calculateWinner = (gameState) => {
-  const winningPossibilities = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < winningPossibilities.length; i++) {
-    const [a, b, c] = winningPossibilities[i];
-    if (
-      gameState[a] &&
-      gameState[a] === gameState[b] &&
-      gameState[a] === gameState[c]
-    ) {
-      return {
-        winningPlayer: gameState[a],
-        possibilitie: winningPossibilities[i],
-      };
-    }
-  }
-  return { winningPlayer: null, possibilitie: [null, null, null] };
-};
+import colors from "../../helpers/colors";
 
-const Index = () => {
+import SecondStyleButton from "../SecondStyleButton";
+
+const Index = ({ usersData }) => {
   const [gameState, setGameState] = useState(Array(9).fill(null));
   const [xIsNext, setXisNext] = useState(true);
+
+  const calculateWinner = () => {
+    const winningPossibilities = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < winningPossibilities.length; i++) {
+      const [a, b, c] = winningPossibilities[i];
+      if (
+        gameState[a] &&
+        gameState[a] === gameState[b] &&
+        gameState[a] === gameState[c]
+      ) {
+        return {
+          winningPlayer: usersData[gameState[a]] + ` (${gameState[a]})`,
+          possibilitie: winningPossibilities[i],
+        };
+      }
+    }
+    return { winningPlayer: null, possibilitie: [null, null, null] };
+  };
 
   const handleClick = (Key) => {
     const newGameState = gameState.slice();
@@ -58,6 +62,20 @@ const Index = () => {
     return false;
   };
 
+  const handleReset = () => {
+    setGameState(Array(9).fill(null));
+    setXisNext(true);
+  };
+
+  const handleCheckedCel = (Key) => {
+    const isKeyUsed = gameState[Key];
+    const haveWinner = calculateWinner(gameState);
+    if (isKeyUsed && !haveWinner.winningPlayer) {
+      return true
+    }
+    return false;
+  }
+
   const Cel = ({ Key }) => {
     const haveWinner = calculateWinner(gameState);
     return (
@@ -66,6 +84,7 @@ const Index = () => {
         celKey={Key}
         winnerPossibilitie={haveWinner.possibilitie}
         onClick={() => handleClick(Key)}
+        checked={handleCheckedCel(Key)}
       >
         {gameState[Key] ? gameState[Key] : Key}
       </BoardCel>
@@ -76,12 +95,17 @@ const Index = () => {
     const haveWinner = calculateWinner(gameState);
     const checkDraw = calculateDraw();
     if (haveWinner.winningPlayer) {
-      return <span>Winner: {haveWinner.winningPlayer}</span>;
+      return <Header>Winner: {haveWinner.winningPlayer}</Header>;
     }
     if (checkDraw) {
-      return <span>Draw</span>;
+      return <Header>Draw</Header>;
     }
-    return <span>Next Player: {xIsNext ? "X" : "O"}</span>;
+    return (
+      <Header>
+        Next Player:{" "}
+        {xIsNext ? usersData["X"] + " (X)" : usersData["O"] + " (O)"}
+      </Header>
+    );
   };
 
   return (
@@ -102,6 +126,7 @@ const Index = () => {
         <Cel Key={7} />
         <Cel Key={8} />
       </div>
+      <ResetButton onClick={() => handleReset()}>Restart</ResetButton>
     </Container>
   );
 };
@@ -111,19 +136,40 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const Header = styled.div`
+  text-align: center;
+  border: 1px solid ${colors.black};
+  border-radius: 5px;
+  margin: 10px;
+  font-family: sans-serif;
+`;
+
 const BoardCel = styled.button`
   height: 120px;
   width: 120px;
   font-size: 100px;
+  cursor: pointer;
+  ${(props) => {
+    if (props.checked) {
+      return { color: colors.font};
+    }
+    return {color: colors.lightGray}
+  }}
   ${(props) => {
     if (
       props.celKey === props.winnerPossibilitie[0] ||
       props.celKey === props.winnerPossibilitie[1] ||
       props.celKey === props.winnerPossibilitie[2]
     ) {
-      return { backgroundColor: "red" };
+      return { backgroundColor: colors.black };
     }
   }}
+`;
+
+const ResetButton = styled(SecondStyleButton)`
+  margin-top: 10px;
+  border: 1px solid red;
+  color: red;
 `;
 
 export default Index;

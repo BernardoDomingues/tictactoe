@@ -4,6 +4,7 @@ import colors from "../helpers/colors";
 const Button = styled.button`
   border: 0;
   margin: 0;
+  font-family: sans-serif;
   background: ${colors.black};
   font-weight: 900;
   color:  ${colors.white};
