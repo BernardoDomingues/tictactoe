@@ -71,10 +71,10 @@ const Index = ({ usersData }) => {
     const isKeyUsed = gameState[Key];
     const haveWinner = calculateWinner(gameState);
     if (isKeyUsed && !haveWinner.winningPlayer) {
-      return true
+      return true;
     }
     return false;
-  }
+  };
 
   const Cel = ({ Key }) => {
     const haveWinner = calculateWinner(gameState);
@@ -151,9 +151,9 @@ const BoardCel = styled.button`
   cursor: pointer;
   ${(props) => {
     if (props.checked) {
-      return { color: colors.font};
+      return { color: colors.font };
     }
-    return {color: colors.lightGray}
+    return { color: colors.lightGray };
   }}
   ${(props) => {
     if (
@@ -164,6 +164,17 @@ const BoardCel = styled.button`
       return { backgroundColor: colors.black };
     }
   }}
+
+  @media screen and (max-width: 400px) {
+    height: 80px;
+    width: 80px;
+    font-size: 50px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 100px;
+    width: 100px;
+    font-size: 50px;
+  }
 `;
 
 const ResetButton = styled(SecondStyleButton)`
