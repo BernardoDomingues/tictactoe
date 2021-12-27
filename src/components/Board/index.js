@@ -165,6 +165,10 @@ const BoardCel = styled.button`
     }
   }}
 
+  :disabled {
+    cursor: default;
+  }
+
   @media screen and (max-width: 400px) {
     height: 80px;
     width: 80px;
