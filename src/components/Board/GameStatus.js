@@ -6,7 +6,6 @@ import colors from "../../helpers/colors";
 
 const GameStatus = () => {
   const {
-    gameState,
     calculateWinner,
     calculateDraw,
     xIsNext,
