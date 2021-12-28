@@ -5451,6 +5451,11 @@ jest@^27.4.3:
     import-local "^3.0.2"
     jest-cli "^27.4.5"
 
+js-cookie@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
+  integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -8030,6 +8035,11 @@ svgo@^2.7.0:
     csso "^4.2.0"
     picocolors "^1.0.0"
     stable "^0.1.8"
+
+sweetalert2@^11.3.1:
+  version "11.3.1"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.3.1.tgz#66fb0a64dd1f95a69a5cf19e63f1bbf14bc19cc4"
+  integrity sha512-p+8lC/j+x1Fi5RY77f0h4gYAIC9zC8eG+wfKt/CmxolGB8PK2yvEgJ3Gqa1wY6OkzH6Mm3MYbVCgj7IwyoID6g==
 
 symbol-tree@^3.2.4:
   version "3.2.4"
