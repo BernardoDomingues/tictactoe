@@ -22,7 +22,6 @@ const About = () => {
     fetchData();
   }, []);
 
-  console.log(imageUrl);
   return (
     <BasePage>
       <Container>
