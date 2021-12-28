@@ -6,7 +6,6 @@ import { useGames } from "../../providers/game";
 import Logo from "../../components/Logo";
 import ButtonGrid from "../../components/ButtonGrid";
 import Button from "../../components/Button";
-import SecondStyleButton from "../../components/SecondStyleButton";
 
 import BasePage from "../../components/BasePage";
 import NewGame from "../Game/New";
@@ -23,7 +22,6 @@ const Home = () => {
           </LogoGrid>
           <ButtonGrid>
             <NewGameButton onClick={() => setMenuState(1)}>New Game</NewGameButton>
-            <SecondStyleButton>Load Game</SecondStyleButton>
           </ButtonGrid>
         </>
       )}

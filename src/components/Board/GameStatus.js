@@ -12,7 +12,7 @@ const GameStatus = () => {
     xIsNext,
     usersData
   } = useGames();
-  const haveWinner = calculateWinner(gameState);
+  const haveWinner = calculateWinner();
   const checkDraw = calculateDraw();
   if (haveWinner.winningPlayer) {
     return <Header>Winner: {haveWinner.winningPlayer}</Header>;

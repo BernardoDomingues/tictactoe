@@ -12,7 +12,7 @@ const Cel = ({ Key }) => {
     handleClick,
     handleCheckedCel,
   } = useGames();
-  const haveWinner = calculateWinner(gameState);
+  const haveWinner = calculateWinner();
   return (
     <BoardCel
       disabled={disableButton(Key)}

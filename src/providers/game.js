@@ -43,7 +43,7 @@ export const GamesProvider = ({ children }) => {
   };
 
   const calculateDraw = () => {
-    const haveWinner = calculateWinner(gameState);
+    const haveWinner = calculateWinner();
     for (let i = 0; i < gameState.length; i++) {
       if (!gameState[i] || haveWinner.winningPlayer) {
         return false;
@@ -54,7 +54,7 @@ export const GamesProvider = ({ children }) => {
 
   const disableButton = (Key) => {
     const isKeyUsed = gameState[Key];
-    const haveWinner = calculateWinner(gameState);
+    const haveWinner = calculateWinner();
     if (isKeyUsed || haveWinner.winningPlayer) {
       return true;
     }
@@ -68,7 +68,7 @@ export const GamesProvider = ({ children }) => {
 
   const handleCheckedCel = (Key) => {
     const isKeyUsed = gameState[Key];
-    const haveWinner = calculateWinner(gameState);
+    const haveWinner = calculateWinner();
     if (isKeyUsed && !haveWinner.winningPlayer) {
       return true;
     }
