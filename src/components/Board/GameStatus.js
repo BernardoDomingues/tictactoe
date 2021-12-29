@@ -5,18 +5,29 @@ import { useGames } from "../../providers/game";
 import colors from "../../helpers/colors";
 
 const GameStatus = () => {
-  const {
-    calculateWinner,
-    calculateDraw,
-    xIsNext,
-    usersData
-  } = useGames();
+  const { calculateWinner, calculateDraw, xIsNext, usersData, setUsersData } =
+    useGames();
   const haveWinner = calculateWinner();
   const checkDraw = calculateDraw();
   if (haveWinner.winningPlayer) {
+    // if (xIsNext) {
+    //   const newUsersData = Object.assign({}, usersData, {
+    //     Owins: usersData.Owins + 1,
+    //   });
+    //   setUsersData(newUsersData);
+    // } else {
+    //   const newUsersData = Object.assign({}, usersData, {
+    //     Xwins: usersData.Xwins + 1,
+    //   });
+    //   setUsersData(newUsersData);
+    // }
     return <Header>Winner: {haveWinner.winningPlayer}</Header>;
   }
   if (checkDraw) {
+    // const newUsersData = Object.assign({}, usersData, {
+    //   draws: usersData.draws + 1,
+    // });
+    // setUsersData(newUsersData);
     return <Header>Draw</Header>;
   }
   return (

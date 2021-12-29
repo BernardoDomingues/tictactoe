@@ -11,7 +11,7 @@ import SecondStyleButton from "../../components/SecondStyleButton";
 
 const PreGame = () => {
   const { setUsersData, backToMenu } = useGames();
-  const values = { X: "", O: "" };
+  const values = { X: "", O: "", Xwins: 0, Owins: 0, draws: 0 };
 
   const validations = Yup.object().shape({
     X: Yup.string()

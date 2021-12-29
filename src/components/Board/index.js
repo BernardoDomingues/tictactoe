@@ -5,6 +5,7 @@ import { useGames } from "../../providers/game";
 
 import Cel from "./Cel";
 import GameStatus from "./GameStatus";
+import LeaderBoard from "./LeaderBoard";
 import SecondStyleButton from "../SecondStyleButton";
 
 const Board = () => {
@@ -28,6 +29,7 @@ const Board = () => {
         <Cel Key={7} />
         <Cel Key={8} />
       </div>
+      <LeaderBoard />
       <ResetButton onClick={() => handleReset()}>Restart</ResetButton>
     </Container>
   );
