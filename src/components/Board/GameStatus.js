@@ -5,8 +5,13 @@ import { useGames } from "../../providers/game";
 import colors from "../../helpers/colors";
 
 const GameStatus = () => {
-  const { calculateWinner, calculateDraw, xIsNext, usersData, setUsersData } =
-    useGames();
+  const {
+    calculateWinner,
+    calculateDraw,
+    xIsNext,
+    usersData,
+    /*setUsersData*/
+  } = useGames();
   const haveWinner = calculateWinner();
   const checkDraw = calculateDraw();
   if (haveWinner.winningPlayer) {
