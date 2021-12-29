@@ -10,7 +10,7 @@ import Modal from "../Modal";
 const LeaderBoard = () => {
   const { usersData } = useGames();
   const [visibleModal, setVisibleModal] = useState(false);
-  console.log(usersData);
+
   return (
     <>
       <LeaderBoardButton onClick={() => setVisibleModal(true)}>
